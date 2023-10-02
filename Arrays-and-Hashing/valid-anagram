@@ -1,0 +1,20 @@
+//https://leetcode.com/problems/valid-anagram/
+
+//Complexity O(n log n) for sorting. (String comparison is O(n))
+//Extra space O(1)
+
+
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        
+        char[] sChar = s.toCharArray();
+        char[] tChar = t.toCharArray();
+
+        Arrays.sort(sChar);
+        Arrays.sort(tChar);
+
+        return Arrays.equals(sChar,tChar);
+
+        
+    }
+}
