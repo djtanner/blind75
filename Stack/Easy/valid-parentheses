@@ -1,0 +1,40 @@
+//https://leetcode.com/problems/valid-parentheses/description/
+
+//Time complexity : O(n) - traverse string and push/pop are O(1)
+//Space: O(n) - worst case is pushing all open brackets onto stack
+
+class Solution {
+    public boolean isValid(String s) {
+        
+        //if it's open, push onto stack. if it's closed, pop stack and check if matching
+        //if reach end and stack is empty return true;
+        
+    
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < s.length(); i++){
+
+            if(stack.isEmpty() && (s.charAt(i) == ')' || s.charAt(i) == ']' || s.charAt(i) == '}'))
+                { return false;  }
+
+            if(s.charAt(i) == '(' || s.charAt(i) == '[' || s.charAt(i) == '{'){
+                stack.push(s.charAt(i));
+            }
+
+            else {
+            
+                char checkVal = stack.pop();
+
+                if(s.charAt(i) == ')' && checkVal != '('){return false;}
+                if(s.charAt(i) == '}' && checkVal != '{'){return false;}
+                if(s.charAt(i) == ']' && checkVal != '['){return false;}
+            }
+            
+
+        }
+
+        return stack.isEmpty();
+
+
+    }
+}
