@@ -1,0 +1,49 @@
+//recursive solution to checking valid palindrome
+
+class Solution {
+    public boolean isPalindrome(String s) {
+       //if first and last are both letters, check if match
+       //if so, remove and call isPalindrome on shorter string
+        //else check last and first and shorten and test
+
+
+        if(s.length() <= 1){ return true ;}
+
+        while(s.length() > 1){
+        //2 pointers    
+        int i = 0;
+        int j = s.length()-1;        
+
+        Character first = Character.toLowerCase(s.charAt(i));
+        Character last = Character.toLowerCase(s.charAt(j));
+
+        if(Character.isLetterOrDigit(first) && Character.isLetterOrDigit(last)){
+            if(first == last){
+                s = s.substring(1,j);
+                return isPalindrome(s);
+            }
+
+            else {
+                return false;
+            }
+
+
+        }
+
+        else if(Character.isLetterOrDigit(first) && !Character.isLetterOrDigit(last)){
+            s = s.substring(0,j);
+            return isPalindrome(s);
+        }
+
+
+        else{
+            s = s.substring(1);
+            return isPalindrome(s);
+        }
+
+        }
+
+       return false; 
+       
+    }
+}
