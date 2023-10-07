@@ -1,0 +1,55 @@
+//O(N * 4^L) where N is number of nodes on the board and L is length of the word,
+//we are searching 4 directions for each word
+
+class Solution {
+
+    private boolean[][] visitedNodes;
+    private int maxRow;
+    private int maxCol;
+    private String word;
+    private char[][] board;
+
+    public boolean exist(char[][] board, String word) {
+        maxRow = board.length;
+        maxCol = board[0].length;
+        this.word = word;
+        this.board = board;
+        visitedNodes = new boolean[maxRow][maxCol];
+
+        for(int i = 0; i < maxRow; i++){
+            for(int j = 0; j < maxCol; j++){
+                
+               if(dfs(i,j,0)) {return true;}
+            }
+        }
+
+        return false;
+    }
+
+
+    public boolean dfs(int row, int col,int pointer){
+        //base cases
+        if(pointer == word.length()){
+            return true;
+        }
+        if(row < 0 || col < 0){ return false;}
+        if(row >= maxRow || col >= maxCol){return false;}
+        if(word.charAt(pointer) != board[row][col]){
+            return false;
+        }
+        if(visitedNodes[row][col]){return false;} //already visited
+
+        visitedNodes[row][col] = true;
+        //do dfs in all directions
+        boolean top = dfs(row-1, col, pointer+1);
+        boolean right = dfs(row, col+1, pointer+1);
+        boolean left = dfs(row, col-1, pointer+1);
+        boolean down = dfs(row+1, col, pointer+1);
+
+        boolean result = top || right || left || down;
+        
+        if(!result){visitedNodes[row][col] = false;}
+        return result;
+    }
+
+}
