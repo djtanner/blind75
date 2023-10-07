@@ -1,5 +1,5 @@
-//O(N * 4^L) where N is number of nodes on the board and L is length of the word,
-//we are searching 4 directions for each word
+//O(N * 3^L) where N is number of nodes on the board and L is length of the word,
+//we are searching 3 directions for each word since we don't go back to previous visited node
 
 class Solution {
 
