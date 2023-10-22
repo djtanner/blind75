@@ -1,0 +1,34 @@
+//https://leetcode.com/problems/most-visited-sector-in-a-circular-track/description/
+//O(N)
+
+class Solution {
+    public List<Integer> mostVisited(int n, int[] rounds) {
+        List<Integer> result = new ArrayList<>();
+        int start = rounds[0];
+        int end = rounds[rounds.length-1];
+        //if first<end
+
+        if(start <= end){
+            for(int i = start; i <= end; i++){
+                result.add(start);
+                start++;
+            }
+        }
+
+        //end < start, go from 1 to end and start, n.
+        else{
+             for(int j = 1; j <= end; j++){
+                result.add(j);
+                
+             }
+
+             for(int i = start; i <=n; i++){
+                 result.add(start);
+                 start++;
+             }
+
+        }
+
+        return result;
+    }
+}
