@@ -1,0 +1,60 @@
+//https://leetcode.com/problems/degree-of-an-array/description/
+//O(n)
+class Solution {
+    public int findShortestSubArray(int[] nums) {
+        //for each digit want to store the digit: numOccurences,leftmost occurrence, rightmost occurrence
+        //map : 2: [2,1,2]
+        //also store max separately so we can check map to compare
+
+        int max= 1;
+        HashMap<Integer, int[]> map = new HashMap<>();
+        //populate num of occurrences
+        for(int i = 0; i < nums.length; i++){
+            if(!map.containsKey(nums[i])){
+                int[] arr = new int[3];
+                arr[0] = 1;
+                map.put(nums[i], arr);
+            }
+            else{
+                int[] arr = map.get(nums[i]);
+                arr[0]++;
+                map.put(nums[i],arr);
+                if(arr[0]>max){max = arr[0];}
+            }
+        }
+    //populate left occurrence
+        for(int i = 0; i < nums.length; i++){
+            int[] arr = map.get(nums[i]);
+            if(arr[1] == 0 && nums[i]!=nums[0]){
+                arr[1] = i;
+            }
+
+        }
+
+    //populate right occurrence
+        for(int i = nums.length-1; i>=0; i--){
+            int[] arr = map.get(nums[i]);
+            if(arr[2] == 0){
+                arr[2] = i;
+            }
+        }
+
+      
+    //find the shortest length from the vals that have the max
+    int shortest = Integer.MAX_VALUE;
+
+    for (Map.Entry<Integer, int[]> entry : map.entrySet()) {
+        int[] arr = entry.getValue();
+        System.out.println(Arrays.toString(arr)); 
+        if(arr[0] == max){
+            int diff = arr[2]-arr[1];
+            if(diff < shortest){
+                shortest = diff;
+            }
+
+        }
+    }
+
+return shortest+1;
+    
+}
