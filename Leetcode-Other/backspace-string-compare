@@ -1,0 +1,42 @@
+//https://leetcode.com/problems/backspace-string-compare/
+//O(M+N)
+
+class Solution {
+    public boolean backspaceCompare(String s, String t) {
+        Stack<String> sStack = new Stack<>();
+        Stack<String> tStack = new Stack<>();
+
+
+        for(int i = 0; i < s.length(); i++){
+            sStack.push("" + s.charAt(i));
+            if(s.charAt(i) == '#'){
+                if(!sStack.isEmpty())sStack.pop();
+                if(!sStack.isEmpty())sStack.pop();
+            }         
+        }
+
+        String sResult = "";
+
+        while(!(sStack.isEmpty())){
+            sResult += sStack.pop();
+        }
+
+        for(int i = 0; i < t.length(); i++){
+            tStack.push("" + t.charAt(i));
+            if(t.charAt(i) == '#'){
+               if(!tStack.isEmpty()) tStack.pop();
+               if(!tStack.isEmpty()) tStack.pop();
+            }
+          
+        }
+        
+
+        String tResult = "";
+        
+        while(!tStack.isEmpty()){
+            tResult += tStack.pop();
+        }
+
+        return tResult.equals(sResult);
+    }
+}
