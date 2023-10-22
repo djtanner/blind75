@@ -1,0 +1,25 @@
+//https://leetcode.com/problems/water-bottles/description/
+//O(log_base_numExchanges(numbottles))
+
+class Solution {
+    public int numWaterBottles(int numBottles, int numExchange) {
+        
+        return helper(numBottles, numExchange, numBottles);
+    }
+
+
+    public int helper(int numEmpties, int numExchange, int numDrank){
+        
+        if(numEmpties < numExchange){
+            return numDrank;
+        }
+        
+        int numDrankNow = numEmpties/numExchange;
+        numEmpties = numEmpties%numExchange;
+        
+
+        return helper(numEmpties+numDrankNow, numExchange, numDrank+numDrankNow);
+
+
+    }
+}
