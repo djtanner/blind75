@@ -1,0 +1,33 @@
+class Solution {
+    public long pickGifts(int[] gifts, int k) {
+        return helper (gifts, k);
+
+    }
+
+    public long helper(int[] gifts, int k){
+
+        if(k == 0){
+           long total = 0;
+           for(int i = 0; i < gifts.length; i++){
+               total += gifts[i];
+           }     
+            return total;
+        }
+
+        int max = 0;
+        int maxIndex = 0;
+
+        for(int i = 0; i < gifts.length; i++){
+            if (gifts[i] > max) {
+                max = gifts[i];
+                maxIndex = i;
+            }
+        }
+
+        gifts[maxIndex] = (int)Math.sqrt(max);
+
+        return helper(gifts, k-1);
+
+
+    }
+}

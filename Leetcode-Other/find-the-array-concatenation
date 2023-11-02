@@ -1,0 +1,26 @@
+//https://leetcode.com/problems/find-the-array-concatenation-value/submissions/
+
+class Solution {
+    public long findTheArrayConcVal(int[] nums) {
+        
+        return helper(nums, 0, nums.length - 1, 0);
+    }
+
+    public long helper(int[] nums, int frontPointer, int backPointer, long total){
+        
+        if(frontPointer > backPointer){
+            return total;
+        }
+
+        if(frontPointer == backPointer){
+            total += nums[frontPointer];
+            return total;
+        }
+        
+        total += Integer.valueOf(String.valueOf(nums[frontPointer]) + String.valueOf(nums[backPointer]));
+        
+
+        return helper(nums, frontPointer + 1, backPointer - 1, total);
+
+    }
+}
