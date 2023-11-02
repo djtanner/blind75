@@ -1,0 +1,25 @@
+class Solution {
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        //map: nums[i]: i
+        //if find dup and i-j > k, update the map with the new value because trying to shorten the distance between i and j
+
+        Map<Integer,Integer> map = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++){
+            Integer value = map.get(nums[i]);
+
+            //found a duplicate
+            if(value != null){
+                if(Math.abs(i - value) <= k){return true;}
+                
+            }
+
+            map.put(nums[i], i);
+
+
+        }
+
+        return false;
+
+    }
+}
