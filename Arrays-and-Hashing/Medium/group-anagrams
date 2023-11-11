@@ -1,0 +1,60 @@
+//https://leetcode.com/problems/group-anagrams/description/
+
+//O(n)
+import java.util.ArrayList;
+
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        //anagrams should be alphabetical
+        //map:  alphaword: <real word, real word, real word>
+        //entry set, return arraylist of values
+
+        Map<String,ArrayList<String>> map = new HashMap<>();
+
+        for(int i = 0; i < strs.length; i++){
+            String alpha = sortString(strs[i]);
+
+            ArrayList<String> values = map.get(alpha);
+            
+            if(values == null){
+                map.put(alpha, new ArrayList<String>());
+            }
+
+           (map.get(alpha)).add(strs[i]);
+        }
+
+        System.out.println(map.toString());
+
+        List<List<String>> result = new ArrayList<>();
+
+        for(Map.Entry<String,ArrayList<String>> entry : map.entrySet()){
+
+            result.add(entry.getValue());
+        }
+
+        return result;
+
+
+    }
+
+    public String sortString(String input){
+
+        char[] charArr = input.toCharArray();
+
+        Arrays.sort(charArr);
+
+        StringBuilder result = new StringBuilder();
+
+        for(int i = 0; i < charArr.length; i++){
+            result.append(charArr[i]);
+        }
+
+        return result.toString();
+
+
+
+    }
+
+
+
+}
