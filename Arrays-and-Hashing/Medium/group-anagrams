@@ -23,7 +23,7 @@ class Solution {
            (map.get(alpha)).add(strs[i]);
         }
 
-        System.out.println(map.toString());
+        //System.out.println(map.toString());
 
         List<List<String>> result = new ArrayList<>();
 
