@@ -26,9 +26,7 @@ public:
             } else {
                 // Move L pointer to make the window valid
                 hashMap[s[L]]--;
-                if (hashMap[s[L]] == 0) {
-                    hashMap.erase(s[L]);
-                }
+               
                 L++;
             }
 
