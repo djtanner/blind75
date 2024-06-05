@@ -1,0 +1,34 @@
+class Solution {
+    public int findMin(int[] nums) {
+        return binSearch(0, nums.length - 1, nums);      
+    }
+
+    public int binSearch(int start, int end, int[] nums) {
+        // Base case: if there is only one element left
+        if (start == end) {
+            return nums[start];
+        }
+        
+        // Calculate middle index
+        int middle = start + (end - start) / 2;
+
+        // Check if the middle element is the minimum
+        if (middle > start && nums[middle] < nums[middle - 1]) {
+            return nums[middle];
+        }
+        
+        // Check if the element after the middle is the minimum
+        if (middle < end && nums[middle + 1] < nums[middle]) {
+            return nums[middle + 1];
+        }
+        
+        // Decide which half to continue searching
+        if (nums[end] > nums[middle]) {
+            // Minimum is in the left half
+            return binSearch(start, middle, nums);
+        } else {
+            // Minimum is in the right half
+            return binSearch(middle + 1, end, nums);
+        }
+    }
+}
